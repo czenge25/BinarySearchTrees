@@ -15,7 +15,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         if (x == null) {
             return 0;
         } else {
-            return x.getSize();
+            return 1 + size(x.getLeft()) + size(x.getRight());
         }
     }
 
@@ -103,7 +103,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
             return null;
         }
         while (n.getLeft() != null) {
-            n.getLeft();
+            n = n.getLeft();
         }
         return n;
     }
@@ -118,7 +118,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
             return null;
         }
         while (n.getRight() != null) {
-            n.getRight();
+            n = n.getRight();
         }
         return n;
     }
