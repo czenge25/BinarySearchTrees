@@ -82,7 +82,20 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     // Recursive helper method for remove operation
     private Node remove(Node<Key, Value> n, Key key) {
         // Implementation of removing a node with a specific key
-        // ...
+        if (n == null) return null;
+        int i = key.compareTo(n.getKey());
+        if (i < 0) {
+            n.setLeft(remove(n.getLeft(), key));
+        } else if (i > 0) {
+            n.setRight(remove(n.getRight(), key));
+        } else {
+            if (n.getRight() == null) return n.getLeft();
+            if (n.getLeft() == null) return n.getRight();
+            Node min = min(n.getRight());
+            min.setLeft(n.getLeft());
+            n = n.getRight();
+        }
+        n.setSize(size(n.getRight()) + size(n.getLeft()) + 1);
         return n; // Returns the modified node
     }
 
@@ -94,7 +107,12 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     // Recursive helper method to find the node with the minimum key
     private Node<Key, Value> min(Node<Key, Value> n) {
         // Implementation to find the minimum key node in the tree
-        // ...
+        if (n == null) {
+            return null;
+        }
+        while (n.getLeft() != null) {
+            n = n.getLeft();
+        }
         return n; // Returns the node with the minimum key
     }
 
@@ -106,7 +124,12 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     // Recursive helper method to find the node with the maximum key
     private Node<Key, Value> max(Node<Key, Value> n) {
         // Implementation to find the maximum key node in the tree
-        // ...
+        if (n == null) {
+            return null;
+        }
+        while (n.getRight() != null) {
+            n = n.getRight();
+        }
         return n; // Returns the node with the maximum key
     }
 
